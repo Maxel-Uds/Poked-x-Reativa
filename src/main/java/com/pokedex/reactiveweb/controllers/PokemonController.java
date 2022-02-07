@@ -41,4 +41,9 @@ public class PokemonController {
     public Mono<ResponseEntity<Void>> deleteById(@PathVariable String id) {
         return service.deleteById(id);
     }
+
+    @DeleteMapping
+    public Mono<Void> deleteAll() {
+        return service.deleteAll();
+    }
 }

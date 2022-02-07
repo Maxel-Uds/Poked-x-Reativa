@@ -47,6 +47,10 @@ public class PokemonService {
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
+    public Mono<Void> deleteAll() {
+        return repository.deleteAll();
+    }
+
     private Pokemon newPokemon(Pokemon request) {
         return new Pokemon(null, request.getNome(), request.getCategoria(), request.getHabilidades(), request.getPeso());
     }
