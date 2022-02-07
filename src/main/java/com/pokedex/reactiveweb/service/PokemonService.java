@@ -38,6 +38,15 @@ public class PokemonService {
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
+    public Mono<ResponseEntity<Void>> deleteById(String id) {
+        return repository.findById(id)
+                .flatMap(pokemon ->
+                        repository.delete(pokemon)
+                                .then(Mono.just(ResponseEntity.ok().<Void>build()))
+                )
+                .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
+
     private Pokemon newPokemon(Pokemon request) {
         return new Pokemon(null, request.getNome(), request.getCategoria(), request.getHabilidades(), request.getPeso());
     }

@@ -36,4 +36,9 @@ public class PokemonController {
     public Mono<ResponseEntity<Pokemon>> updatePokemon(@PathVariable String id, @RequestBody Pokemon request) {
         return service.update(id, request);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public Mono<ResponseEntity<Void>> deleteById(@PathVariable String id) {
+        return service.deleteById(id);
+    }
 }
