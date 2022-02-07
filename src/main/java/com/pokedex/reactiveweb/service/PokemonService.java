@@ -21,4 +21,13 @@ public class PokemonService {
                 .map(pokemon -> ResponseEntity.ok(pokemon))
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
+
+    public Mono<Pokemon> createPokemon(Pokemon request) {
+        Pokemon pokemon = newPokemon(request);
+        return repository.save(pokemon);
+    }
+
+    private Pokemon newPokemon(Pokemon request) {
+        return new Pokemon(null, request.getNome(), request.getCategoria(), request.getHabilidades(), request.getPeso());
+    }
 }
