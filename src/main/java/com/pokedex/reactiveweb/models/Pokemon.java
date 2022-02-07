@@ -1,5 +1,7 @@
 package com.pokedex.reactiveweb.models;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -75,5 +77,16 @@ public class Pokemon implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
+    }
+
+    @Override
+    public String toString() {
+         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
+                .append("id", id)
+                .append("nome", nome)
+                .append("categoria", categoria)
+                .append("habilidades", habilidades)
+                .append("peso", peso)
+                .toString();
     }
 }
