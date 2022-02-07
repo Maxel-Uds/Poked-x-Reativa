@@ -27,6 +27,17 @@ public class PokemonService {
         return repository.save(pokemon);
     }
 
+    public Mono<ResponseEntity<Pokemon>> update(String id, Pokemon request) {
+        return repository.findById(id)
+                .flatMap(pokemon -> {
+                    pokemon = newPokemon(request);
+                    pokemon.setId(id);
+                    return repository.save(pokemon);
+                })
+                .map(pokemon -> ResponseEntity.ok(pokemon))
+                .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
+
     private Pokemon newPokemon(Pokemon request) {
         return new Pokemon(null, request.getNome(), request.getCategoria(), request.getHabilidades(), request.getPeso());
     }
